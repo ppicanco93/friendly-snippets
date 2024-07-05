@@ -1,262 +1,286 @@
 {
-    "createt": {
-        "prefix": "createt",
-        "body": ["CREATE TABLE ${1:tableName} (", "\t${2:attribute(s)}", ");"],
-        "description": "Create regular table"
+    "HEADER PACKAGE":{
+    	"prefix": "HEADER",
+    	"body": [
+		"/**",
+		" * ${1:DESCRICAO Pacote}",
+		" *",
+		" * @author ${2:Pedro Picanco} ($CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR)",
+		" *",
+		" * @version ${3:1}",
+		" *          $2 ($CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR)",
+		" *           DM: ${4:2999865, 4021856} - ${5:DESCRICAO ALTERACAO VERSAO}",
+		" *",
+		" * @headcom",
+		" */"
+    	],
+    	"description": "HEADER PACKAGE"
     },
-    "createti": {
-        "prefix": "createti",
+    "FUNCTION DESCRIPTION":{
+    	"prefix": "DESCFUNC",
+    	"body": [
+		"  /**",
+		"    * ${1:DESCRICAO FUNCAO}",
+		"    *",
+		"    * @author ${2:Pedro Picanco} ($CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR)",
+		"    *",
+		"    * @param ${3:PARAMETRO} ${4:DESCRICAO PARAMETRO}",
+		"    * @return ${5:DESCRICAO RETORNO}",
+		"    *",
+		"    * @version $2 ($CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR)",
+		"    *          DM: ${6:2999865, 4021856}",
+		"    */"
+    	],
+    	"description": "DESCRIPTION FOR FUNCTION"
+    },
+    "PROCEDURE DESCRIPTION":{
+    	"prefix": "DESCPROC",
+    	"body": [
+		"  /**",
+		"    * ${1:DESCRICAO PROCEDURE}",
+		"    *",
+		"    * @author ${2:Pedro Picanco} ($CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR)",
+		"    *",
+		"    * @param ${3:PARAMETRO} ${4:DESCRICAO PARAMETRO}",
+		"    *",
+		"    * @version $2 ($CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR)",
+		"    *          DM: ${5:2999865, 4021856}",
+		"    */"
+    	],
+    	"description": "DESCRIPTION FOR PROCEDURE"
+    },
+    "PACKAGE..SPEC": {
+        "prefix": "PKG",
         "body": [
-            "CREATE TABLE IF NOT EXISTS ${1:tableName} (",
-            "\t${2:attribute(s)}",
+            "CREATE OR REPLACE PACKAGE ${1:NAME} IS",
+            "  $0",
+            "END $1;"
+        ],
+        "description": "PACKAGE SPEC"
+    },
+    "PACKAGE..BODY": {
+        "prefix": "PKG",
+        "body": [
+            "CREATE OR REPLACE PACKAGE BODY ${1:NAME} IS",
+            "  $0",
+            "END $1;"
+        ],
+        "description": "PACKAGE BODY"
+    },
+
+    "FUNC..SPEC": {
+        "prefix": "FUNC_SPEC",
+        "body": [
+            "FUNCTION ${1:NAME}(",
+            "  ${2:PARAM} ${3:PARAM_TYPE}${4:%TYPE}",
+            ")",
+            "RETURN ${5:RETURN_TYPE};"
+        ],
+        "description": "FUNCTION SPEC"
+    },
+    "FUNC": {
+        "prefix": "FUNC",
+        "body": [
+            "FUNCTION ${1:NAME}(",
+            "  ${2:PARAM} ${3:PARAM_TYPE}${4:%TYPE}",
+            ")",
+            "RETURN ${5:RETURN_TYPE}${6:%TYPE}",
+            "IS",
+            "  ${7:wl_ret} $5$6",
+            "BEGIN",
+            "  $0",
+            "  RETURN $7;",
+            "END $1;"
+        ],
+        "description": "FUNCTION"
+    },
+
+    "PROC..SPEC": {
+        "prefix": "PROC_SPEC",
+        "body": [
+            "PROCEDURE ${1:NAME}(",
+            "  ${2:PARAM} ${3:PARAM_TYPE}${4:%TYPE}",
             ");"
         ],
-        "description": "Create table with conditional"
+        "description": "PROCEDURE SPEC"
     },
-    "created": {
-        "prefix": "created",
-        "body": ["CREATE DATABASE ${1:name};"],
-        "description": "Create regular table"
-    },
-    "createdi": {
-        "prefix": "createdi",
-        "body": ["CREATE DATABASE IF NOT EXISTS ${1:name};"],
-        "description": "Create table with conditional"
-    },
-    "insert": {
-        "prefix": "insert",
+    "PROC": {
+        "prefix": "PROC",
         "body": [
-            "INSERT INTO ${1:tableName} (",
-            "\t${2:attribute(s)}",
-            ") VALUES ( ${3:values} )"
+            "PROCEDURE ${1:NAME}(",
+            "  ${2:PARAM} ${3:PARAM_TYPE}${4:%TYPE}",
+            ")",
+            "IS",
+            "BEGIN",
+            "  $0",
+            "END $1;"
         ],
-        "description": "Insert value(s)"
+        "description": "PROCEDURE"
     },
-    "dropt": {
-        "prefix": "dropt",
-        "body": ["DROP TABLE ${1:tableName};"],
-        "description": "Drop table"
-    },
-    "dropd": {
-        "prefix": "dropd",
-        "body": ["DROP DATABASE ${1:dbName};"],
-        "description": "Drop database"
-    },
-    "dropti": {
-        "prefix": "dropti",
-        "body": ["DROP TABLE IF EXISTS ${1:tableName};"],
-        "description": "Drop table with conditional"
-    },
-    "dropdi": {
-        "prefix": "dropdi",
-        "body": ["DROP DATABASE IF EXISTS ${1:dbName};"],
-        "description": "Drop database with conditional"
-    },
-    "showt": {
-        "prefix": "showt",
-        "body": ["SHOW TABLES;"],
-        "description": "Show tables"
-    },
-    "showd": {
-        "prefix": "showd",
-        "body": ["SHOW DATABASES;"],
-        "description": "Show databases"
-    },
-    "select": {
-        "prefix": "select",
-        "body": ["SELECT ${1:attribute(s)} FROM ${2:tableName};"],
-        "description": "Regular select"
-    },
-    "selectd": {
-        "prefix": "selectd",
-        "body": ["SELECT DISTINCT ${1:attribute(s)}", "\tFROM ${2:tableName};"],
-        "description": "Select Distinct"
-    },
-    "selectw": {
-        "prefix": "selectw",
+
+    "BEGIN..END": {
+        "prefix": "BEGIN",
         "body": [
-            "SELECT ${1:attribute(s)}",
-            "\tFROM ${2:tableName}",
-            "\tWHERE ${3:condition};"
+            "BEGIN",
+            "  $0",
+            "END;"
         ],
-        "description": "Select with condition"
+        "description": "BEGIN..END"
     },
-    "selector": {
-        "prefix": "selector",
+
+    "IF..END": {
+        "prefix": "IFTHEN",
         "body": [
-            "SELECT ${1:attribute(s)}",
-            "\tFROM ${2:tableName}",
-            "\tORDER BY ${3:attribute(s)} ${4:ASC|DESC};"
+            "IF ${1:CONDITION} THEN",
+            "  $0",
+            "END IF;"
         ],
-        "description": "Select with order"
+        "description": "IF..END"
     },
-    "updatet": {
-        "prefix": "updatet",
+    "IF..ELSE..END": {
+        "prefix": "IFELSE",
         "body": [
-            "UPDATE ${1:tableName}",
-            "\tSET ${2:attribute(s)}",
-            "\tWHERE ${3:condition};"
+            "IF ${1:CONDITION} THEN",
+            "  $2",
+            "ELSE",
+            "  $3",
+            "END IF;"
         ],
-        "description": "Update table"
+        "description": "IF..ELSE..END"
     },
-    "delete": {
-        "prefix": "delete",
-        "body": ["DELETE FROM ${1:tableName}", "\tWHERE ${3:condition};"],
-        "description": "Delete records"
-    },
-    "altert": {
-        "prefix": "altert",
-        "body": ["ALTER TABLE ${1:tableName}", "\t ${2:intructions};"],
-        "description": "Alter table"
-    },
-    "alterad": {
-        "prefix": "alterad",
-        "body": ["ALTER TABLE ${1:tableName}", "\tADD COLUMN ${2:col_name};"],
-        "description": "Alter table - Add column"
-    },
-    "alteraf": {
-        "prefix": "alteraf",
+    "ELSIF..": {
+        "prefix": "ELSIF",
         "body": [
-            "ALTER TABLE ${1:tableName}",
-            "\tADD COLUMN ${2:col_name}",
-            "\tAFTER ${5:col_name};"
+            "ELSIF ${1:CONDITION} THEN",
+            "  $0"
         ],
-        "description": "Alter table - Add column after"
+        "description": "ELSIF.."
     },
-    "alterdb": {
-        "prefix": "alterdb",
+
+    "CASE..WHEN..END": {
+        "prefix": "CASE",
         "body": [
-            "ALTER DATABASE ${1:dbName}",
-            "\tCHARACTER SET ${2:charset}",
-            "\tCOLLATE ${3:utf8_unicode_ci};"
+            "CASE $1",
+            "  WHEN ${2:CONDITION} THEN $3",
+            "  ELSE $4",
+            "END;"
         ],
-        "description": "Alter database"
+        "description": "CASE..WHEN..END"
     },
-    "ijoin": {
-        "prefix": "ijoin",
+    "WHEN..THEN": {
+        "prefix": "WHEN",
         "body": [
-            "SELECT ${1:attribute(s)}",
-            "\tFROM ${2:tableName}",
-            "\tINNER JOIN ${3:tableName2}",
-            "\tON ${4:match};"
+            "WHEN ${1:CONDITION} THEN $2"
         ],
-        "description": "Inner Join"
+        "description": "WHEN..THEN"
     },
-    "rjoin": {
-        "prefix": "rjoin",
+
+    "LOOP..END": {
+        "prefix": "LOOP",
         "body": [
-            "SELECT ${1:attribute(s)}",
-            "\tFROM ${2:tableName}",
-            "\tRIGHT JOIN ${3:tableName2}",
-            "\tON ${4:match};"
+            "LOOP",
+            "  $0",
+            "END LOOP"
         ],
-        "description": "Right Join"
+        "description": "LOOP..END"
     },
-    "ljoin": {
-        "prefix": "ljoin",
+
+    "FOR..IN": {
+        "prefix": "FOR",
         "body": [
-            "SELECT ${1:attribute(s)}",
-            "\tFROM ${2:tableName}",
-            "\tLEFT JOIN ${3:tableName2}",
-            "\tON ${4:match};"
+            "FOR $1 IN $2 LOOP",
+            "  $0",
+            "END LOOP"
         ],
-        "description": "Left Join"
+        "description": "FOR..IN"
     },
-    "fjoin": {
-        "prefix": "fjoin",
+
+    "FOR..IN..COLLECTION": {
+        "prefix": "FOR",
         "body": [
-            "SELECT ${1:attribute(s)}",
-            "\tFROM ${2:tableName}",
-            "\tFULL JOIN OUTER ${3:tableName2}",
-            "\tON ${4:match}",
-            "\tWHERE ${5:condition};"
+            "FOR I IN 1..${1:COLLECTION}.COUNT LOOP",
+            "  $0",
+            "END LOOP"
         ],
-        "description": "Full Join"
+        "description": "FOR..IN..COLLECTION"
     },
-    "union": {
-        "prefix": "union",
+
+    "EXCEPTION_NO_DATA": {
+        "prefix": "EXCEPTION_NO_DATA",
         "body": [
-            "SELECT ${1:attribute(s)} FROM ${2:tableName}",
-            "UNION",
-            "SELECT ${3:attribute(s)} FROM ${4:tableName2};"
+            "EXCEPTION",
+            "  WHEN NO_DATA_FOUND THEN",
+            "    $1;"
         ],
-        "description": "Regular union"
+        "description": "EXCEPTION NO_DATA_FOUND"
     },
-    "uniona": {
-        "prefix": "uniona",
+    "EXCEPTION_TOO_MANY": {
+        "prefix": "EXCEPTION_TOO_MANY",
         "body": [
-            "SELECT ${1:attribute(s)} FROM ${2:tableName}",
-            "UNION ALL",
-            "SELECT ${3:attribute(s)} FROM ${4:tableName2};"
+            "EXCEPTION",
+            "  WHEN TOO_MANY_ROWS THEN",
+            "    $1;"
         ],
-        "description": "All union"
+        "description": "EXCEPTION TOO_MANY_ROWS"
     },
-    "groupb": {
-        "prefix": "groupb",
+    "EXCEPTION_OTHERS": {
+        "prefix": "EXCEPTION",
         "body": [
-            "SELECT ${1:attribute(s)}",
-            "\tFROM ${2:tableName}",
-            "\tGROUP BY ${3:attribute(s)};"
+            "EXCEPTION",
+            "  WHEN ${1:OTHERS} THEN",
+            "    ${2:NULL};"
         ],
-        "description": "Group by"
+        "description": "EXCEPTION OTHERS"
     },
-    "bakupd": {
-        "prefix": "bakupd",
-        "body": ["BACKUP DATABASE ${1:dbName}", "\tTO DISK ${2:filepath};"],
-        "description": "Backup database"
-    },
-    "bakupdw": {
-        "prefix": "bakupdw",
+
+    "RAISE_APPLICATION_ERROR": {
+        "prefix": "RAISE",
         "body": [
-            "BACKUP DATABASE ${1:dbName}",
-            "\tTO DISK ${2:filepath}",
-            "\tWITH ${3:DIFERENTIAL};"
+            "RAISE_APPLICATION_ERROR(${1:-20000}, '${2:MESSAGE}');"
         ],
-        "description": "Differential backup database"
+        "description": "RAISE APPLICATION ERROR"
     },
-    "primaryk": {
-        "prefix": "primaryk",
-        "body": ["PRIMARY KEY(${1:attribute})"],
-        "description": "Primary Key"
-    },
-    "primarykc": {
-        "prefix": "primarykc",
-        "body": ["CONSTRAINT ${1:attribute} PRIMARY KEY(${2:attribute(s)})"],
-        "description": "Constraint Primary Key"
-    },
-    "foreingk": {
-        "prefix": "foreingk",
+    "DBMS_OUTPUT.PUT_LINE": {
+        "prefix": "OUTPUT",
         "body": [
-            "FOREIGN KEY(${1:attribute}) REFERENCES ${2:tableName}(${3:attribute})"
+            "DBMS_OUTPUT.PUT_LINE('${1:MESSAGE}');"
         ],
-        "description": "Foreign Key"
+        "description": "DBMS_OUTPUT.PUT_LINE"
     },
-    "foreingkc": {
-        "prefix": "foreingkc",
+
+    "SELECT": {
+        "prefix": "SELECT",
         "body": [
-            "CONSTRAINT ${1:attribute} FOREIGN KEY (${2:attribute(s)})",
-            "\tREFERENCES ${3:tableName}(${4:attribute})"
+            "SELECT ${1:FIELD}",
+            "  ${2:INTO ${3:VARIABLE}}",
+            "  FROM ${4:TABLE}",
+            " WHERE ${5:CONDITION}"
         ],
-        "description": "Constraint foreign Key"
+        "description": "SELECT"
     },
-    "check": {
-        "prefix": "check",
-        "body": ["CHECK ( ${1:condition} )"],
-        "description": "Check"
+    "INSERT": {
+        "prefix": "INSERT",
+        "body": [
+            "INSERT INTO ${1:TABLE} ${2:(${3:COLUMN})}",
+            "VALUES ${4:(${5:VALUES})}"
+        ],
+        "description": "INSERT"
     },
-    "creteuser": {
-        "prefix": "createuser",
-        "body": "CREATE USER '${1:username}'@'${2:localhost}' IDENTIFIED BY '${3:password}';",
-        "description": "Create User"
+    "UPDATE": {
+        "prefix": "UPDATE",
+        "body": [
+            "UPDATE ${1:TABLE}",
+            "   SET ${2:FIELD}=${3:VALUE}",
+            " WHERE ${4:CONDITION}"
+        ],
+        "description": "UPDATE"
     },
-    "deleteuser": {
-        "prefix": "deleteuser",
-        "body": "DELETE FROM mysql.user WHERE user = '${1:userName}';",
-        "description": "Delete user"
-    },
-    "grantuser": {
-        "prefix": "grantuser",
-        "body": "GRANT ALL PRIVILEGES ON ${1:db}.${2:tb} TO '${3:user_name}'@'${4:localhost}';",
-        "description": "Grant privileges"
+    "DELETE": {
+        "prefix": "DELETE",
+        "body": [
+            "DELETE FROM ${1:TABLE}",
+            " WHERE ${2:CONDITION}"
+        ],
+        "description": "DELETE"
     }
 }
